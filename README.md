@@ -26,7 +26,7 @@ This research fine-tunes two pretrained transformer-based sequence-to-sequence m
 
 The application uses a three-tier architecture:
 
-1. **Presentation Tier** — Web-based frontend (HTML, CSS, JavaScript)
+1. **Presentation Tier** — Lightweight web frontend (HTML5, CSS3, JavaScript)
 2. **Logic Tier** — FastAPI backend with ByT5-base inference engine
 3. **Data Tier** — SECM Sinhala parallel corpus (4,444 samples)
 
@@ -35,6 +35,8 @@ The application uses a three-tier architecture:
 - **Dynamic Padding** — Memory-efficient batch processing
 - **Beam Search Decoding** — Higher quality output than greedy decoding
 - **Real-Time Inference** — Immediate feedback to users
+
+---
 
 ## Installation and Setup
 
@@ -47,81 +49,65 @@ The application uses a three-tier architecture:
 
 1. **Clone the repository:**
 ```bash
+git clone [https://github.com/ravirush/cmrs-transliterator-app.git](https://github.com/ravirush/cmrs-transliterator-app.git)
 cd cmrs-transliterator-app
 ```
 
 2. **Create and activate virtual environment:**
+**macOS/ Linux:**
 ```bash
 python3 -m venv venv
 source venv/bin/activate
-# On Windows: venv\Scripts\activate
+```
+**Windows:**
+```bash
+python -m venv venv
+venv\Scripts\activate
 ```
 
 3. **Install dependencies:**
 ```bash
+pip install --upgrade pip
 pip install -r requirements.txt
 ```
 
-4. **Place the trained model:**
-   - Download the fine-tuned ByT5-base model
-   - Extract into `backend/model/` folder
-   - Ensure the folder contains: `model.safetensors`, `config.json`, `tokenizer_config.json`, etc.
+4. **Model Weights Configuration:**
+You do not need to manually download weights to run this application:
+   - Default (Cloud): The application will automatically stream and cache the model from Hugging Face Hub (ravirush/cmrs-byt5-model) on first run.
+   - Local (Optional): If you already have weights locally, place them in backend/model/ (model.safetensors, config.json, etc.), and the application will detect and load them directly from disk.
 
 ### Running the Application
 
-1. **Start the backend server:**
+1. **Start the FastAPI server:**
 ```bash
-cd backend
-uvicorn main:app --reload
-```
-**or**
-
-1. **Open a new terminal:**
-2. **Create and activate virtual environment:**
-source venv/bin/activate
-3. **Start the backend server:**
 uvicorn backend.main:app --reload
-4. **You are good to go:**
+```
 
-The server will start at `http://127.0.0.1:8000`
+2. **Access the App:**
+   - Open your browser and navigate to: `http://127.0.0.1:8000`
+   - The web frontend will load automatically.
+   - API documentation (Swagger UI) is available at: `http://127.0.0.1:8000/docs`
 
-2. **Open in browser:**
-   - Navigate to `http://127.0.0.1:8000`
-   - The frontend loads automatically
-
-3. **Using the application:**
-   - Type code-mixed Romanized Sinhala text in the input panel
-   - Click "Transliterate" or press Ctrl+Enter
-   - Native Sinhala script appears in the output panel
-   - Use "Copy" button to copy output to clipboard
-   - Use "Clear" button to reset both panels
+3. **Using the Interface:**
+   - Type code-mixed Romanized Sinhala text in the input panel.
+   - Click Transliterate (or press Ctrl + Enter / Cmd + Enter).
+   - Copy the native Sinhala output or clear both panels using the interface buttons.
 
 ### Example Inputs
 
-| Romanized Sinhala | Native Sinhala |
+| Romanized Sinhala (Input) | Native Sinhala (Output) |
 |---|---|
 | mama gena yanawa | මම ගෙන යනවා |
 | koheda yanne | කොහෙද යන්නේ |
 | food rasai | ෆුඩ් රසයි |
 | api wage karanna one | අපි වාගේ කරන්න ඕනේ |
 
+---
+
 ## Technology Stack
 
-### Backend
-- **Python** — Core language
-- **FastAPI** — Web framework
-- **Uvicorn** — ASGI server
-- **PyTorch** — Deep learning framework
-- **HuggingFace Transformers** — Model loading and inference
-- **ByT5-base** — Fine-tuned sequence-to-sequence model
-
-### Frontend
-- **HTML5** — Page structure
-- **CSS3** — Styling and animations
-- **JavaScript** — User interaction and API communication
-
-### Development & Training
-- **Kaggle** — GPU training environment (NVIDIA P100)
-- **HuggingFace Datasets** — Dataset processing
-- **HuggingFace Evaluate** — Evaluation metrics (BLEU, CER, WER)
-- **Matplotlib** — Visualization of training curves
+- **Framework:** FastAPI, Uvicorn, Pydantic
+- **FastADeep Learning:** PyTorch, Hugging Face Transformers
+- **Architecture:** ByT5-base (Token-free byte-level sequence-to-sequence model)
+- **Frontend:** HTML5, CSS3, Vanilla JavaScript (Fetch API)
+- **Model Registry:** Hugging Face Hub (ravirush/cmrs-byt5-model)
