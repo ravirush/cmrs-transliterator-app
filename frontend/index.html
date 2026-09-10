@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>CMRS Transliterator</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=DM+Mono:wght@400;500&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="/static/styles.css"/>
+</head>
+<body>
+
+<div class="page">
+
+  <!-- ── header ── -->
+  <header class="header">
+    <div class="badge">
+      <span class="badge-dot"></span>
+      NLP Research Demo
+    </div>
+    <h1>CMRS <em>Transliterator</em></h1>
+    <p class="subtitle">Convert Code-Mixed Romanized Sinhala into Native Sinhala Script</p>
+  </header>
+
+  <!-- ── main card ── -->
+  <main class="card">
+    <div class="panels">
+
+      <!-- INPUT panel -->
+      <div class="panel panel--input">
+        <div class="panel-header">
+          <span class="panel-label">Source Script</span>
+          <span class="lang-tag lang-tag--roman">Romanized</span>
+        </div>
+        <div class="panel-body">
+          <textarea
+            id="inputText"
+            placeholder="Enter Code-Mixed Romanized Sinhala text here..."
+            maxlength="1000"
+            spellcheck="false"
+            autocomplete="off"
+            autocorrect="off"
+          ></textarea>
+          <span class="char-counter" id="charCounter">0 / 1000</span>
+        </div>
+      </div>
+
+      <!-- divider -->
+      <div class="divider" aria-hidden="true"></div>
+
+      <!-- OUTPUT panel -->
+      <div class="panel panel--output">
+        <div class="panel-header">
+          <span class="panel-label">Sinhala Script</span>
+          <button class="copy-btn" id="copyBtn" title="Copy output" aria-label="Copy output">
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <rect x="9" y="9" width="13" height="13" rx="2"/>
+              <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/>
+            </svg>
+            Copy
+          </button>
+        </div>
+        <div class="panel-body">
+          <div class="output-area" id="outputArea">
+            <span class="output-placeholder">Sinhala transliteration will appear here...</span>
+          </div>
+          <!-- loading overlay -->
+          <div class="loader" id="loader" aria-live="polite">
+            <div class="loader-dots">
+              <span></span><span></span><span></span>
+            </div>
+            <span class="loader-text">Transliterating...</span>
+          </div>
+        </div>
+      </div>
+
+    </div><!-- /panels -->
+
+    <!-- footer -->
+    <footer class="card-footer">
+      <div class="footer-left">
+        <div class="model-badge">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+            <path d="M12 2L2 7l10 5 10-5-10-5z"/>
+            <path d="M2 17l10 5 10-5"/>
+            <path d="M2 12l10 5 10-5"/>
+          </svg>
+          Model: <strong>ByT5-base</strong>
+        </div>
+        <div class="chunk-badge" id="chunkBadge" style="display:none;">
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>
+          </svg>
+          <span id="chunkText"></span>
+        </div>
+      </div>
+      <div class="footer-actions">
+        <button class="btn btn--clear" id="clearBtn">Clear</button>
+        <button class="btn btn--primary" id="translateBtn">
+          Transliterate
+          <svg class="btn-arrow" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2">
+            <path d="M5 12h14M12 5l7 7-7 7"/>
+          </svg>
+        </button>
+      </div>
+    </footer>
+
+  </main>
+
+  <!-- ── examples ── -->
+  <section class="examples" aria-label="Example inputs">
+    <p class="examples-label">Try an example</p>
+    <div class="examples-list">
+      <button class="example-chip" data-text="kema eka too spicy">kema eka too spicy</button>
+      <button class="example-chip" data-text="coffee ekak bonna enawada? ">coffee ekak bonna enawada? </button>
+      <button class="example-chip" data-text="price eka reasonable">price eka reasonable</button>
+      <button class="example-chip" data-text="environemt eka harima beautiful">environment eka harima beautiful</button>
+    </div>
+  </section>
+
+</div><!-- /page -->
+
+<!-- toast message -->
+<div class="toast" id="toast" role="alert" aria-live="assertive"></div>
+
+<script src="/static/script.js"></script>
+</body>
+</html>
