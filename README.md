@@ -106,8 +106,8 @@ uvicorn backend.main:app --reload
 
 ## Technology Stack
 
-- **Framework:** FastAPI, Uvicorn, Pydantic
-- **FastADeep Learning:** PyTorch, Hugging Face Transformers
+- **Framework:** FastAPI, Uvicorn
+- **Deep Learning:** PyTorch, Hugging Face Transformers
 - **Architecture:** ByT5-base (Token-free byte-level sequence-to-sequence model)
 - **Frontend:** HTML5, CSS3, Vanilla JavaScript (Fetch API)
 - **Model Registry:** Hugging Face Hub (ravirush/cmrs-byt5-model)
