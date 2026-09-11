@@ -97,10 +97,10 @@ uvicorn backend.main:app --reload
 
 | Romanized Sinhala (Input) | Native Sinhala (Output) |
 |---|---|
-| mama gena yanawa | මම ගෙන යනවා |
-| koheda yanne | කොහෙද යන්නේ |
-| food rasai | ෆුඩ් රසයි |
-| api wage karanna one | අපි වාගේ කරන්න ඕනේ |
+| kema eka too spicy | කෑම එක හොඳටම සැර |
+| coffee ekak bonna enawada? | කෝපි එකක් බොන්න එනවද? |
+| price eka reasonable | ගාන සාධාරණයි |
+| environment eka harima beautiful | පරිසරය හරිම ලස්සනයි |
 
 ---
 
